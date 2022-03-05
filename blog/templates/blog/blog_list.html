@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+
+
+
+
+{% block content %}
+<a href ="#"class ="btn btn-primary btn-block mt-3 mb-1">새 포스팅</a>
+<table class="table table-bordered table-hover" >
+    <tbody>
+       {% for post in posts %}
+        <tr>
+            <td>{{post.pk}}</td>
+            <td>
+                {% if post.photo %}
+                <img src="{{ post.photo.url }}" alt="" style="width: 70px;">
+                {% else %}
+                NO PHhoto 
+                {% endif %}
+                </td>
+                
+                <td>
+                    {{ post.content }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
