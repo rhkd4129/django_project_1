@@ -4,7 +4,6 @@ from django.shortcuts import get_list_or_404,get_object_or_404
 from .forms import searchForm,PostForm
 from django.db.models import Q
 
-
 def BlogList(request):
     posts = Post.objects.all()
     q = request.GET.get('search','')
@@ -44,6 +43,8 @@ def blog_edit(request,post_pk):
     else:
         form = PostForm(instance=post)
     return render(request,'blog/post_form.html',{'form':form,})
+
+
 
 
 def blog_delete(request,post_pk):

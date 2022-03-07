@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',TView.as_view(),name ='home'),
     path('blog/',include('blog.urls')),
+    path('crawling/',include('crawling.urls')),
 ]
 
 if settings.DEBUG:#미디어파일에 대한 스태틱 서브기능?

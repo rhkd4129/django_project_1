@@ -1,0 +1,15 @@
+{% extends 'crawling/layout.html' %}
+
+
+
+
+
+{% block content %}
+    {% for song in melon_chart %}
+       <p>{{ forloop.counter}}: {{song}}</p>
+    {% endfor %}
+
+
+
+   
+{% endblock content %}
