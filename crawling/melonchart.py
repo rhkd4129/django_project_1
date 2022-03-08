@@ -1,5 +1,4 @@
 import re
-from tracemalloc import start
 import requests
 from bs4 import BeautifulSoup
 
@@ -23,6 +22,6 @@ for n,title in enumerate(titles,start=1):
 
 my_dict = {key[i]:value[i] for i in range(len(key))}
 #my_dict = {i:value[i] for i in range(len(key))}
-# print(my_dict.items())
+print(my_dict.items())
 
 
