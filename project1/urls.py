@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',TView.as_view(),name ='home'),
+    path('accounts/',include('accounts.urls')),
     path('blog/',include('blog.urls')),
     path('crawling/',include('crawling.urls')),
 ]

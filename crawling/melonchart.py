@@ -10,18 +10,21 @@ res.raise_for_status()
 soup  = BeautifulSoup(res.text,'lxml')
 
 titles = soup.find('table').find("tbody").find_all("tr",attrs={"class":re.compile("^lst")})
-key=[]
-value=[]
+
+my_dict={}
 for n,title in enumerate(titles,start=1):
-    t = title.find("div",attrs={"class":"ellipsis rank01"})
-    author = title.find("div",attrs={"class":"ellipsis rank02"})
-    key.append(t.a.get_text())
-    value.append(author.a.get_text())
-    #print(f"{n}. {t.a.get_text()} : {author.a.get_text()}")
+    t = title.find("div",attrs={"class":"ellipsis rank01"}).a.get_text()
+    author = title.find("div",attrs={"class":"ellipsis rank02"}).a.get_text()
+    my_dict[t]=author
+
+#my_dict = {key[i]:value[i] for i in range(len(key))}
+#for key, value in my_dict.items():
+#print(my_dict.items())
+song = list(my_dict.keys())
+artict = list(my_dict.values())
+
+     
 
 
-my_dict = {key[i]:value[i] for i in range(len(key))}
-#my_dict = {i:value[i] for i in range(len(key))}
-print(my_dict.items())
 
 
