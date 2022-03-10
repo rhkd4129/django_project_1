@@ -5,4 +5,4 @@ def profile(request):
     pass
 def sign_up(request):
     return render(request,'accounts/singup.html')
-# Create your views here.
+# Create your views her
