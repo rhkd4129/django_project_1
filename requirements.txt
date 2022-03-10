@@ -1,0 +1,8 @@
+django
+
+pillow
+bs4
+requests
+lxml
+
+django-extensions 
