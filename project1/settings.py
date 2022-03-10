@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_extensions',
 
     #localapps
     'accounts',
@@ -142,3 +142,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = reverse_lazy('blog:post_list')
+AUTH_USER_MODEL = "accounts.User"
