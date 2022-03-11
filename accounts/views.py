@@ -9,7 +9,7 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm()
         if form.is_valid():
-            user = form.save()
+            form.save()
             return redirect('accounts:login')
 
     else:
