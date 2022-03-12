@@ -30,5 +30,6 @@
 
       <a href="{% url 'blog:blog_edit' post.pk %}"><div class="btn btn-primary mt-3">edit</div></a>
       <a href="{% url 'blog:blog_delete' post.pk %}"><div class="btn btn-danger mt-3">delete</div></a>
+      <a href="{% url 'blog:post_list'  %}"><div class="btn btn-secondary mt-3">List</div></a>
   
 {% endblock content %}

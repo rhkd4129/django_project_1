@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ os.path.join(BASE_DIR,'project1','staticf')]
+STATICFILES_DIRS = [ os.path.join(BASE_DIR,'project1','static')]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 
@@ -143,6 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "accounts.User"
-LOGIN_REDIRECT_URL = reverse_lazy('blog:post_list')
+LOGIN_REDIRECT_URL = reverse_lazy('blog:post_list')#로그인성공했을때 이동
 
 
