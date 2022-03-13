@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post,Comment
 
 
 class searchForm(forms.Form):
@@ -9,7 +9,21 @@ class searchForm(forms.Form):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title','content','photo','is_public']#'__all__'
+        fields = ['title','content','photo','is_public','gender']#'__all__'
+        #fields = '__all__'
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['message']
 
+        
+        # labels = {
+        #     'content': '댓글내용',
+        # }
+
+        #    widgets={
+        #     "caption": forms.Textarea,
+        # }
+        

@@ -29,7 +29,10 @@
                 <td>
                     <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                 </td>
-                
+                <td>
+                    {{post.author}}
+                </td>
+
                 <td>
                     {{ post.created_at|date:'Y년 m월 d일 G시 i분'}}
                 </td>
@@ -41,5 +44,7 @@
         {% endfor %}
     </tbody>
 </table>
+
+
 
 {% endblock content %}

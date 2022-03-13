@@ -1,13 +1,17 @@
 from django.urls import reverse
 from django.db import models
-from django.conf import settings 
+from django.conf import settings
 
 
 class Post(models.Model):
-    #author = models.ForeignKey(settings.AUTH_USER_MODEL) # 추천!
+    class GenderChices(models.TextChoices):
+        MALE = "M","Male"   #DB에저장되는 값 ,실제 사용할 값
+        FEMALE = "F","Female"
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE) # 추천!
     title = models.CharField(max_length=20)
     photo = models.ImageField(blank = True, upload_to = 'blog/post/%Y/%m/%d')
     content = models.TextField()
+    gender = models.CharField(max_length=1,blank=True,choices=GenderChices.choices)#,default=GenderChices.MALE
     is_public = models.BooleanField(default = False,verbose_name= '공개여부')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -21,6 +25,7 @@ class Post(models.Model):
          return reverse('blog:post_detail',args=[self.pk])
 
 class Comment(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE) # 추천!
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     message = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
