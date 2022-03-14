@@ -15,6 +15,17 @@
     <a href ="{% url 'blog:blog_create' %}"class ="btn btn-primary btn-block mt-3 mb-3">새 포스팅</a>
     <table class="table table-bordered table-hover" >
     <tbody>
+        <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Photo</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">작성시간</th>
+              <th scope="col">수정시간</th>
+              <th scope="col">댓글수</th>
+            </tr>
+          </thead>
        {% for post in posts %}
         <tr>
             <td>{{post.pk}}</td>
@@ -40,6 +51,8 @@
                 <td>
                     {{ post.updated_at|date:'Y년 m월 d일 G시 i분'}}
                 </td>
+
+                <td>{{ post.comment_set.count }}</td>
             </tr>
         {% endfor %}
     </tbody>

@@ -20,35 +20,17 @@ def BlogList(request):
 
 
 
-
-# class BlogList(ListView,FormView):
-#     model = Post
-#     template_name = 'blog/blog_list.html'
-#     context_object_name = 'posts'
-#     #form_class = searchForm
-
-#     def form_valid(self, form) :
-#         searchResult = form.cleaned_data.get('search')
-#         post_list = Post.objects.filter(Q(title__icontains = searchResult)|
-#         Q(content__icontains = searchResult)).distinct()
-#         context['posts'] = post_list
-#         return(self.request,self.template_name,context)
-#BlogList = BlogList.as_view()
-
-
-
 def blog_detail(request,post_pk):
-    post = get_object_or_404(Post,pk = post_pk)
-   # comments = Comment.objects.all()
-    return render(request,'blog/blog_detail.html',{'post':post,})
-#'comments':comments
+    post = get_object_or_404(Post,id = post_pk)#id로써도되고pk로써도된다? ,,.?
+    comments = Comment.objects.filter(post_id = post_pk)
+    return render(request,'blog/blog_detail.html',{'post':post,'comments':comments})
+#
 # class BlogDeatil(DetailView,ListView):
 #     login_url = settings.LOGIN_URL
 #     model = Post
 #     template_name ='blog/blog_detail.html'
 #     context_object_name = 'post'
 #     pk_url_kwarg = "post_pk"
-
 # blog_detail = BlogDeatil.as_view()
 
 
@@ -62,8 +44,6 @@ def blog_detail(request,post_pk):
 #     else:
 #         form = PostForm()
 #     return render(request,'blog/form.html',{'form':form,})
-
-
 class BlogCreate(LoginRequiredMixin,CreateView):
    # login_url = #reverse_lazy('blog:post_list')#settings.LOGIN_URL
     model =Post
@@ -76,10 +56,6 @@ class BlogCreate(LoginRequiredMixin,CreateView):
         self.object.author = self.request.user
         return super().form_valid(form)
 blog_create = BlogCreate.as_view()
-
-
-
-
 
 
 @login_required
@@ -115,12 +91,9 @@ def blog_edit(request,post_pk):
 
 def blog_delete(request,post_pk):
     post = get_object_or_404(Post,pk =post_pk)
-
-
     if post.author != request.user:
         messages.error(request,'작성자만 삭제가능') #이부분은 데코레이터로 할것
         return redirect(post)
-
     if request.method =='POST':
         post.delete()
         return redirect('blog:post_list')

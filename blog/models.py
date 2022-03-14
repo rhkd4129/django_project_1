@@ -27,12 +27,13 @@ class Post(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE) # 추천!
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
-    message = models.CharField(max_length=100)
+    message = models.CharField(max_length=200,help_text='200자 이하만')#related_name역참조 시 사용할모델
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
    
     def __str__(self):
         return self.message
 
-
+    class meta:
+       ordering = ['-updated_at']
 # Create your models here.

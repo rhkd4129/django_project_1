@@ -8,6 +8,10 @@
           <div class="alert alert-danger" role="alert">
             {{ message.tags }}: {{ message.message }}  
           </div> 
+        {% elif message.tags == 'success' %}
+          <div class="alert alert-primary" role="alert">
+            {{ message.tags }}: {{ message.message }}  
+          </div> 
         {% endif %}
     {% endfor %}
     {% endif %}
@@ -41,23 +45,39 @@
   
 
       <table class="table table-bordered table-hover mt-5">
+        <thead>
+          <tr>
+            <th scope="col">번호</th>
+            <th scope="col">댓글 내용</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성시간</th>
+            <th scope="col">수정시간</th>
+          </tr>
+        </thead>
         <tbody>
           {% if comments %}
             {% for comment in comments %}
-              <tr>
+              
+                <td>{{comment.pk}}</td>
                 <td>{{comment.message}}</td>
-                <td>{{coment.author}}</td>
-                <td>{{coment.created_at }}</td>
-                <td>{{coment.updated_at }}</td>
+                <td>{{comment.author}}</td>
+                <td>{{comment.created_at|date:'Y년 m월 d일 G시 i분' }}</td>
+                <td>
+                  {{comment.updated_at|date:'Y년 m월 d일 G시 i분' }}
+                  <a href="{% url 'blog:comment_edit' comment.pk %}"><div class="btn btn-primary">수정</div></a>
+                  <a href="{% url 'blog:comment_delete' comment.pk %}">{% include "blog/comment_modal.html" with a_label="삭제"%}</a>
+                </td>
               </tr>
               {% endfor %}
           {% else %}
-          <tr><td> <p>등록된 댓글이 없습니다.</p></td></tr>
+          <tr>
+            <td></td>
+            <td> <p>등록된 댓글이 없습니다.</p></td>
+          </tr>
              
           {% endif %}
       </tbody>
     </table>
     
-
 
 {% endblock content %}

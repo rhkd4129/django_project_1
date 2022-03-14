@@ -17,13 +17,19 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['message']
+        labels = {'message': '댓글내용',}
+        widgets={
+            "message": forms.Textarea(attrs= 
+            {'class': 'form-control',
+            'placeholder': "This is a write message 200",
+            'rows': 7,}),
+        }
+     
 
-        
-        # labels = {
-        #     'content': '댓글내용',
+    # def __init__(self, *args, **kwargs):
+    #     super(CommentForm, self).__init__(*args, **kwargs)
+        # self.fields['message'].widget.attrs = {
+        #     'class': 'form-control',
+        #     'placeholder': "This is a write message 200",
+        #     'rows': 7
         # }
-
-        #    widgets={
-        #     "caption": forms.Textarea,
-        # }
-        
