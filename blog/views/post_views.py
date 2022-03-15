@@ -18,8 +18,6 @@ def BlogList(request):
         posts = Post.objects.filter(Q(title__icontains = q)|Q(content__icontains =q)).distinct()
     return render(request,'blog/blog_list.html',{'posts':posts,'q':q,})#'form':searchForm,
 
-
-
 def blog_detail(request,post_pk):
     post = get_object_or_404(Post,id = post_pk)#id로써도되고pk로써도된다? ,,.?
     comments = Comment.objects.filter(post_id = post_pk)
@@ -44,6 +42,8 @@ def blog_detail(request,post_pk):
 #     else:
 #         form = PostForm()
 #     return render(request,'blog/form.html',{'form':form,})
+
+
 class BlogCreate(LoginRequiredMixin,CreateView):
    # login_url = #reverse_lazy('blog:post_list')#settings.LOGIN_URL
     model =Post
@@ -80,7 +80,6 @@ def blog_edit(request,post_pk):
 #     form_class = PostForm
 #     pk_url_kwarg = "post_pk"
 #     template_name ='blog/form.html'
-   
 #     def form_valid(self, form):
 #         if self.object.author != self.request.user:   #request.user 현재 로그인 user instance
 #             messages.error(self.request,'작성자만 수정가능')

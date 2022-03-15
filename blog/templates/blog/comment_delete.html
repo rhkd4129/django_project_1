@@ -1,0 +1,14 @@
+{% extends 'blog/layout.html' %}
+
+
+{% block content %}
+
+
+<form action="" method="post">
+            {% csrf_token %}
+                <div class="alert alert-danger">정말 삭제합니가?</div>
+                
+                <input type="submit" value="삭제하겠습니다" class="btn btn-danger"/>
+        </form>
+
+{% endblock content %}
