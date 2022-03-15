@@ -1,11 +1,14 @@
-from mimetypes import common_types
 from ..models import Post,Comment
 from ..forms import CommentForm
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-login_required
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+@login_required
 def comment_create(request,post_pk):
     post = get_object_or_404(Post,pk = post_pk)
     if request.method == 'POST':
@@ -23,8 +26,32 @@ def comment_create(request,post_pk):
     return render(request,'comment/comment_create.html',{"form":form})
 
 
+# class CommentCrate(LoginRequiredMixin,CreateView):
+#     model = Comment
+#     form_class = CommentForm
+#     template_name = 'comment/comment_create.html'
+#     pk_url_kwarg = "post_pk"
 
 
+#     def get_queryset(self):
+#         post = get_object_or_404(Post,pk = self.pk_url_kwarg)
+#         return super().get_queryset(post)
+
+
+#     def form_valid(self, form):
+#         self.object = form.save(False)
+#         self.object.author = self.request.user
+#         self.object.post = 
+#         return super().form_valid(form)
+# comment_create = CommentCrate.as_view()
+
+
+
+
+
+
+
+@login_required
 def comment_edit(request,comment_pk):
     comment = get_object_or_404(Comment,pk = comment_pk)
     # print(comment_pk)==8
