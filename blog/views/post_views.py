@@ -12,6 +12,7 @@ from django.contrib import messages
 from ..models import Post,Comment
 
 def BlogList(request):
+    
     posts = Post.objects.all()
     q = request.GET.get('search','')
     if q:

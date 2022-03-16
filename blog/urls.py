@@ -8,10 +8,10 @@ urlpatterns=[
 
     
     path('',post_views.BlogList,name='post_list'),
-    path('<int:post_pk>/',post_views.blog_detail ,name='post_detail'),
-    path('create/',post_views.blog_create ,name='blog_create'),
-    path('edit/<int:post_pk>/',post_views.blog_edit ,name='blog_edit'),
-    path('delete/<int:post_pk>/',post_views.blog_delete ,name='blog_delete'),
+    path('post/<int:post_pk>/',post_views.blog_detail ,name='post_detail'),
+    path('post/create/',post_views.blog_create ,name='blog_create'),
+    path('post/edit/<int:post_pk>/',post_views.blog_edit ,name='blog_edit'),
+    path('post/delete/<int:post_pk>/',post_views.blog_delete ,name='blog_delete'),
 
     path('comment/create/<int:post_pk>',comment_views.comment_create,name='comment_create'),
     path('comment/edit/<int:comment_pk>',comment_views.comment_edit,name='comment_edit'),

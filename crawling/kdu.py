@@ -10,7 +10,15 @@ soup = BeautifulSoup(res.text,'lxml')
 
 #stitle
 
-titles  = soup.find_all('p',attrs={"class":"stitle"})
+# titles  = soup.find_all('p',attrs={"class":"stitle"})
+subjects=[]
+subjects = soup.find_all('tr',attrs={"class":"child_1 isnotice"}).find.all('td',attrs={"class":"cate"})
+division=[]
+#division = subjects.find('td',attrs={"class":"cate"})
 
-for title in titles: 
-    print(title.a.get_text())
+# for title in subjects: 
+#     print(title)
+
+
+for x in subjects:
+    print(x)
