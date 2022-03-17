@@ -12,7 +12,7 @@ soup = BeautifulSoup(res.text,'lxml')
 
 # titles  = soup.find_all('p',attrs={"class":"stitle"})
 subjects=[]
-subjects = soup.find_all('tr',attrs={"class":"child_1 isnotice"}).find.all('td',attrs={"class":"cate"})
+subjects = soup.find_all('tr',attrs={"class":"child_1 isnotice"})#.find.all('td',attrs={"class":"cate"})
 division=[]
 #division = subjects.find('td',attrs={"class":"cate"})
 
