@@ -24,11 +24,11 @@ def comment_create(request,post_pk):
 
 
 
-@login_required
+
 def comment_edit(request,comment_pk):
     comment = get_object_or_404(Comment,pk = comment_pk)
-    
-
+    # print(comment_pk)==8
+    post =get_object_or_404(Post,pk =comment_pk)
     if comment.author != request.user:
          messages.error(request,'작성자만 수정가능')
          return redirect(comment.post)
@@ -37,7 +37,7 @@ def comment_edit(request,comment_pk):
         if form.is_valid():
             comment = form.save()
             messages.success(request,'포스티저장')
-            redirect()
+            redirect(post)
     else:
         form = CommentForm(instance = comment)
 
@@ -51,8 +51,8 @@ def comment_delete(request,comment_pk):
     comment = get_object_or_404(Comment,pk=comment_pk)
     if request.method == 'POST':
         comment.delete()
-        messages.error(request,'comment 삭제')
+        messages.success(request,'포스팅삭제')
         return redirect(comment.post)
-    return render(request,'comment/comment_delete.html',{'comment':comment,})
+    return render(request,'blog/comment_modal.html',{'comment':comment,})
 
 
