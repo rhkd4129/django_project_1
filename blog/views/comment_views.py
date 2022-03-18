@@ -1,11 +1,11 @@
-from mimetypes import common_types
 from ..models import Post,Comment
 from ..forms import CommentForm
 from django.shortcuts import render,redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-login_required
+
+@login_required
 def comment_create(request,post_pk):
     post = get_object_or_404(Post,pk = post_pk)
     if request.method == 'POST':
@@ -24,11 +24,9 @@ def comment_create(request,post_pk):
 
 
 
-
+@login_required
 def comment_edit(request,comment_pk):
     comment = get_object_or_404(Comment,pk = comment_pk)
-    # print(comment_pk)==8
-    post =get_object_or_404(Post,pk =comment_pk)
     if comment.author != request.user:
          messages.error(request,'작성자만 수정가능')
          return redirect(comment.post)
@@ -37,7 +35,7 @@ def comment_edit(request,comment_pk):
         if form.is_valid():
             comment = form.save()
             messages.success(request,'포스티저장')
-            redirect(post)
+            return redirect(comment.post)
     else:
         form = CommentForm(instance = comment)
 
@@ -49,10 +47,14 @@ def comment_edit(request,comment_pk):
 @login_required
 def comment_delete(request,comment_pk):
     comment = get_object_or_404(Comment,pk=comment_pk)
+    if comment.author != request.user:
+         messages.error(request,'작성자만 수정가능')
+         return redirect(comment.post)
+
     if request.method == 'POST':
         comment.delete()
         messages.success(request,'포스팅삭제')
         return redirect(comment.post)
-    return render(request,'blog/comment_modal.html',{'comment':comment,})
+    return render(request,'comment/comment_delete.html',{'comment':comment,})
 
 
