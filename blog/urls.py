@@ -6,7 +6,8 @@ app_name = 'blog'
 
 urlpatterns=[
 
-    
+
+    path('<username>/',post_views.UserPage,name='user_page'),
     path('',post_views.BlogList,name='post_list'),
     path('<int:post_pk>/',post_views.blog_detail ,name='post_detail'),
     path('create/',post_views.blog_create ,name='blog_create'),

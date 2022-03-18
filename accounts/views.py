@@ -1,10 +1,8 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignupForm
-def profile(request):
-    pass
-
-
+from .forms import SignupForm,ProfileEditForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -16,4 +14,16 @@ def signup(request):
         form = SignupForm()
     return render(request,'accounts/signup.html',{'form':form,})
 # Create your views here.
+
+@login_required
+def profile_edit(request):
+    
+    if request.method =='POST':
+        form = ProfileEditForm(request.POST,request.FILES,instance = request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:post_list')
+    else:
+        form = ProfileEditForm(instance = request.user)
+    return render(request,'accounts/profile_edit.html',{'form':form})
 
