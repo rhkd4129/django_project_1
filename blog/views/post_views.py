@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from ..models import Post,Comment
 from django.contrib.auth import get_user_model
+
+
 def UserPage(request,username):
 
     page_user = get_object_or_404(get_user_model(),username = username)
