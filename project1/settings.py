@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
     'crawling',
+    'eng',
 ]
 
 MIDDLEWARE = [
