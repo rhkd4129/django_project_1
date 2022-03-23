@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from .forms import SignupForm,ProfileEditForm
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
+
 
 def signup(request):
     if request.method == 'POST':
@@ -36,5 +39,9 @@ def password_change(request):
             form.save()
             return redirect('blog:post_list')
     else:
-        form = PasswordChangeForm()
-    return render(request,'accounts/profile_edit.html',{'form':form})
+        form = PasswordChangeForm(instance = request.user)
+    return render(request,'accounts/password_change.html',{'form':form})
+    pass
+
+
+# password_change = PasswordChangeView.as_view()
